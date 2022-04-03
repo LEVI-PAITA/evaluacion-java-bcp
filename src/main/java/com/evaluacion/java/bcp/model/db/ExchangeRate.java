@@ -19,8 +19,8 @@ import lombok.Data;
 public class ExchangeRate implements Serializable{
 
 	@Id
-	@Column(name = "exchange_rate_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "exchange_rate_id")
 	private Long id;
 	
 	@Column(name = "amount")
@@ -38,6 +38,9 @@ public class ExchangeRate implements Serializable{
 	@Column(name = "exchange_rate_price")
 	private Float exchangePrice;
 	
+	@Column(name = "result_price")
+	private Float resultPrice;
+	
 	@Column(name = "creation_user_id")
 	private String creationUser;
 	
@@ -50,4 +53,5 @@ public class ExchangeRate implements Serializable{
 	@Column(name = "audit_date")
 	private LocalDateTime auditDate;
 	
+	private static final long serialVersionUID = 1L;
 }

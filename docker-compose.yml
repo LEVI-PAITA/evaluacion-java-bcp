@@ -1,0 +1,38 @@
+#see for java tunning https://docs.oracle.com/cd/E15523_01/web.1111/e13814/jvm_tuning.htm#PERFM161
+version: '3.8'
+services:
+ 
+ ##########################################################################     
+ #database service
+ ##########################################################################       
+  mysql_db:
+    container_name: mysql
+    image: mysql:latest
+    ports:
+        - 3307:3306
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: db_evaluacion_bcp
+        MYSQL_PASSWORD: root
+  
+ ##########################################################################     
+ #exchangeRate service
+ ##########################################################################  
+  exchange-rate:
+    container_name: bd-exchange-rate
+    image: evaluacion/microservice-docker-evaluacion-java-bcp:0.0.1-SNAPSHOT
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/db_evaluacion_bcp?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "root"
+    ports:
+      - 8082:8080
+    build:
+      context: "./"
+      dockerfile: "Dockerfile"
+    depends_on:
+      - mysql_db 
+      
+
+
+    

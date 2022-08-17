@@ -32,7 +32,8 @@ public class ExchangeRateController {
 
 	@Autowired
 	private ExchangeRateService exchangeRateService;
-	
+
+	//add comment for endpoint
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@PostMapping("/v1")
 	public Mono<ResponseEntity<ExchangeRate>> crearExchangeRate(@RequestBody ExchangeRateRequest request){
